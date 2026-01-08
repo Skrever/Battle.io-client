@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Battle.io"
+run/main_scene="uid://cmvsrojgj0wcb"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+ENUMS="*res://Content/Classes/Global/enums.gd"
+Signals="*res://Content/Classes/Global/Signals.gd"
+Global="*res://Content/Classes/Global/Global.gd"
+WEBSOCKET="*res://Content/Classes/Global/WebSocketConnect.gd"
+CLIENT="*res://Content/Classes/Global/HTTPConnectClient.gd"
+GAME_DATA="*res://Content/Classes/Global/game_data.gd"
+
+[dotnet]
+
+project/assembly_name="Battle.io"
+
+[input]
+
+shoot={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(152, 24),"global_position":Vector2(161, 72),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

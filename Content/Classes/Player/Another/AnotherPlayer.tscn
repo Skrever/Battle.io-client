@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://sdxyefjbc3rv"]
+
+[ext_resource type="Script" uid="uid://dn2j742p1cbex" path="res://Content/Classes/Player/Another/another_player.gd" id="1_5ghpm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_utig6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5ghpm"]
+radius = 10.0
+height = 20.0
+
+[node name="AnotherPlayer" type="CharacterBody2D"]
+script = ExtResource("1_5ghpm")
+metadata/_custom_type_script = "uid://dn2j742p1cbex"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_utig6")
+debug_color = Color(0.311415, 0.626461, 5.77569e-07, 0.42)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
+mesh = SubResource("SphereMesh_5ghpm")
