@@ -13,4 +13,16 @@ func move(delta : float):
 	move_and_slide()
 
 func shoot():
-	pass
+	pass #эта функция служит как заглушка, потому что этот класс наследуется от обычного игрока
+	# надо сделать так, чтобы оба класса Player и Another наследовались от одного, а не Another от Player
+	# Да, по факту анимацию стрельбы тупо не к чему привязывать пока тут в Another, потому что нет такого сигнала, который бы дошёл от сервера.
+
+
+# можно накинуть анимацию
+func get_damage(player_id : int, health : int, damage : int):
+	if player_id == id:
+		print("<Player> : id ", id,  " getted ", damage)
+# можно накинуть анимацию
+func dead(player_id : int):
+	if player_id == id:
+		print("<Player> : id ", id,  " dead")

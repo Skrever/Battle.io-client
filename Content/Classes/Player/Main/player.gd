@@ -53,10 +53,13 @@ func _input(event: InputEvent) -> void:
 
 func shoot():
 	print("<Player> : shoot")
-	WEBSOCKET.send_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_SHOOT,[0])
+	WEBSOCKET.send_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_SHOOT,[0]) # Мы тупо отправляем на сервер команду стрелять
 	
-func get_damage(id : int, health : int, damage : int):
-	print("<Player> : id ", id,  " getted ", damage)
-	
-func dead(id : int):
-	print("<Player> : id ", id,  " dead")
+# можно накинуть анимацию
+func get_damage(player_id : int, health : int, damage : int):
+	if player_id == id:
+		print("<Player> : id ", id,  " getted ", damage)
+# можно накинуть анимацию
+func dead(player_id : int):
+	if player_id == id:
+		print("<Player> : id ", id,  " dead")
