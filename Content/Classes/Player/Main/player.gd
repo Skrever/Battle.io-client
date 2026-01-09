@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody2D
 
-#Это надо добавить в лучшей жизни. Инкапсуляцию данных он захотел, дададададад
 #enum PLAYER_STATES
 #{
 	#SHOOT,
@@ -16,23 +15,28 @@ signal _on_mana_changed		(new_value)
 signal _on_ability_used		(cooldown_time)
 signal _on_player_died		()
 
+# -- Player speed parameter
 const SPEED = 300.0
+# -- Player server id parameter
 var id : int
+# -- Player last direction for server movement
 var _last_direction : Vector2
+# -- Player direction for server movement
 var direction : Vector2:
 	get: return direction
 	set(value):
 		if value != direction:
 			direction = value
+# -- Sync with server global pos
 var sync_global_position : Vector2:
 	get : return sync_global_position
 	set(value):
 		if value != sync_global_position:
 			global_position = value
 			sync_global_position = global_position
-			
+# -- Node for animted behaviouir
 @export var for_animation_object : AnimatedSprite2D
-
+# -- Node for collision behaviour
 @export var for_collision_object : CollisionShape2D
 
 func _ready() -> void:
@@ -69,11 +73,11 @@ func shoot():
 	print("<Player> : shoot")
 	WEBSOCKET.send_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_SHOOT,[0]) # Мы тупо отправляем на сервер команду стрелять
 	
-# можно накинуть анимацию
+
 func get_damage(player_id : int, health : int, damage : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " getted ", damage)
-# можно накинуть анимацию
+
 func dead(player_id : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " dead")
