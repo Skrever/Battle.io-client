@@ -9,6 +9,13 @@ extends CharacterBody2D
 	#DEAD
 #}
 
+
+signal _on_player_spawned 	()
+signal _on_health_changed	(new_value)
+signal _on_mana_changed		(new_value)
+signal _on_ability_used		(cooldown_time)
+signal _on_player_died		()
+
 const SPEED = 300.0
 var id : int
 var _last_direction : Vector2
@@ -23,14 +30,21 @@ var sync_global_position : Vector2:
 		if value != sync_global_position:
 			global_position = value
 			sync_global_position = global_position
+			
+@export var for_animation_object : AnimatedSprite2D
+
+@export var for_collision_object : CollisionShape2D
 
 func _ready() -> void:
 	add_to_group("Player")
 	Signals.PlayerDamaged.connect(get_damage)
 	Signals.PlayerKilled.connect(dead)
-
-func _physics_process(delta: float) -> void:
-	move(delta)
+	var state_machine : Node = preload("uid://18clg5181kcm").instantiate()
+	var camera : Node = Camera2D.new()
+	camera.zoom.x = 2.0
+	camera.zoom.y = 2.0
+	add_child(state_machine)
+	add_child(camera)
 
 func move(delta : float):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()

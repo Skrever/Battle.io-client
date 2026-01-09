@@ -48,7 +48,7 @@ func Physics_update (_delta):
 		its_state_machine.Change_state("stateidle")
 		return
 		
-	its_state_object.velocity = direction * its_state_object.stat_speed
+	its_state_object.velocity = direction * its_state_object.SPEED
 	its_state_object.move_and_slide()
 	
 	if 	 (direction.x > 0):
