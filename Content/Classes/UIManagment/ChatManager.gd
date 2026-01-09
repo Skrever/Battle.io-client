@@ -1,4 +1,5 @@
 extends Node
+class_name ChatManager
 
 # -- Chats input text box field
 @export var chat_field : LineEdit
@@ -69,8 +70,10 @@ func _on_chat_toggler_pressed():
 	match current_state:
 		ChatState.COLLAPSED:
 			CHAT_Enter_expanding_state()
+			Signals.ChatStateChanged.emit(true)
 		ChatState.EXPANDED:
 			CHAT_Enter_collapsing_state()
+			Signals.ChatStateChanged.emit(false)
 		_:
 			pass
 
