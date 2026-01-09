@@ -13,3 +13,9 @@ extends Node2D
 	#if (player and event.is_action_pressed("take")):
 		#player.Take_damage(10)
 		#print("took")
+
+func _ready () -> void:
+	Global.GameStateIsStop.connect(_on_game_stop)
+	
+func _on_game_stop () -> void:
+	get_tree().change_scene_to_file("res://Content/UI/UISegment.tscn")

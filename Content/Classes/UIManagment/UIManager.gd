@@ -19,6 +19,7 @@ var label_current : Node = null
 @export var menu_section_settings 	 : Control
 @export var menu_section_leaderboard : Control
 @export var menu_label 				 : Control
+@export var menu_quickplay 		     : Control
 # -- Export animators for Menu
 @export var animator_main			 : AnimationPlayer
 @export var animator_settings		 : AnimationPlayer
@@ -29,7 +30,8 @@ func _ready () -> void:
 	# Switch off all sections
 	Register_menu("MAIN", 		 menu_section_main)
 	Register_menu("SETTINGS", 	 menu_section_settings)
-	Register_menu("LEADERBOARD", menu_section_leaderboard) 
+	Register_menu("LEADERBOARD", menu_section_leaderboard)
+	Register_menu("QUICKPLAY", 	 menu_quickplay)
 	
 	menu_label.text = "ГЛАВНОЕ МЕНЮ"
 	
@@ -43,7 +45,6 @@ func _ready () -> void:
 func Register_menu (menu_key : String, menu_node : Control) -> void:
 	menus[menu_key] = menu_node
 	menu_node.visible = false
-
 
 # --- Function for turning visibility of  specified the section
 func Show_menu (menu_key : String) -> void:
@@ -62,7 +63,9 @@ func Show_menu (menu_key : String) -> void:
 # --- Signals for pressing the buttons
 # --- Handler of quickplay button
 func _on_quickplay_pressed():
-	get_tree().change_scene_to_file("res://Content/Scenes/TestScene.tscn")
+	Show_menu("QUICKPLAY")
+	menu_label.text = "БЫСТРАЯ ИГРА"
+	#get_tree().change_scene_to_file("res://Content/Scenes/TestScene.tscn")
 	
 # --- Handler of settings button
 func _on_settings_pressed():

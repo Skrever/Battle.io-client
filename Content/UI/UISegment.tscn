@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bk2sw51iswc8e"]
+[gd_scene load_steps=72 format=3 uid="uid://bk2sw51iswc8e"]
 
 [ext_resource type="Script" uid="uid://41wepuuba76j" path="res://Content/Classes/UIManagment/UIManager.gd" id="1_hcmuh"]
 [ext_resource type="Texture2D" uid="uid://5ks2st5d7ri2" path="res://Content/Assets/UI/Background/Background.png" id="2_4t6kl"]
@@ -27,6 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://cv6jc0teipyrg" path="res://Content/Assets/UI/field_frame.png" id="24_drfiy"]
 [ext_resource type="Texture2D" uid="uid://orkosjl2hhud" path="res://Content/Assets/UI/chat_toggler.png" id="24_i2bqy"]
 [ext_resource type="AudioStream" uid="uid://cyv2fjuo0fx0k" path="res://Content/Assets/Sounds/Music/along-the-wayside-medieval-folk-music-128697.mp3" id="25_6vdgs"]
+[ext_resource type="Script" uid="uid://1yrjss4v00ao" path="res://Content/Classes/UIManagment/QPManager.gd" id="27_k3qy0"]
+[ext_resource type="Texture2D" uid="uid://bfpt5o8fuixuw" path="res://Content/Assets/UI/quickplay_window.png" id="27_ovcgw"]
+[ext_resource type="Texture2D" uid="uid://cvxjc4kfq8bs0" path="res://Content/Assets/Testable/quiet_sprite.png" id="29_eq4af"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiu1e"]
 atlas = ExtResource("2_4t6kl")
@@ -399,6 +402,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(375, 608.3331)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Quickplay:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-107, -75.4)]
+}
 
 [sub_resource type="Animation" id="Animation_drfiy"]
 resource_name = "collapse"
@@ -499,6 +514,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(375, 455.00018), Vector2(375, 510.00018), Vector2(375, 589.99976), Vector2(375, 602.4998)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Quickplay:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-107, -116), Vector2(-107, -75)]
+}
 
 [sub_resource type="Animation" id="Animation_6vdgs"]
 resource_name = "expand"
@@ -598,6 +625,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(375, 589.99976), Vector2(375, 551.6669), Vector2(375, 455.00018)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Quickplay:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-107, -75.4), Vector2(-107, -116)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ovcgw"]
 _data = {
@@ -660,7 +699,7 @@ _data = {
 &"button_unhover": SubResource("Animation_eq4af")
 }
 
-[node name="UISegment" type="Control" node_paths=PackedStringArray("menu_section_main", "menu_section_settings", "menu_section_leaderboard", "menu_label", "animator_main", "animator_settings", "animator_leaderboard")]
+[node name="UISegment" type="Control" node_paths=PackedStringArray("menu_section_main", "menu_section_settings", "menu_section_leaderboard", "menu_label", "menu_quickplay", "animator_main", "animator_settings", "animator_leaderboard")]
 z_index = -1
 texture_filter = 1
 layout_mode = 3
@@ -679,6 +718,7 @@ menu_section_main = NodePath("CanvasLayer/Main/MainWindow")
 menu_section_settings = NodePath("CanvasLayer/Settings")
 menu_section_leaderboard = NodePath("CanvasLayer/Leaderboard/LeaderboardWindow")
 menu_label = NodePath("CanvasLayer/Menu/MenuWindow/Label")
+menu_quickplay = NodePath("CanvasLayer/Quickplay")
 animator_main = NodePath("CanvasLayer/Main/animator")
 animator_settings = NodePath("CanvasLayer/Settings/animator")
 animator_leaderboard = NodePath("CanvasLayer/Leaderboard/animator")
@@ -691,9 +731,6 @@ transform = Transform2D(1.2, 0, 0, 1.2, 0, 0)
 position = Vector2(545, 301.667)
 scale = Vector2(2.3, 2.278)
 sprite_frames = SubResource("SpriteFrames_n1c7k")
-animation = &"idle_2"
-frame = 9
-frame_progress = 1.0
 script = ExtResource("6_2j6l0")
 
 [node name="Settings" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("music_slider", "audio_slider")]
@@ -1134,6 +1171,105 @@ offset_bottom = 662.3332
 scale = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("24_b64ag")
+
+[node name="Quickplay" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("character_image", "character_label", "previous_button", "next_button", "select_button")]
+layout_mode = 3
+anchor_right = 0.83100003
+anchor_bottom = 0.82400006
+offset_left = -107.0
+offset_top = -75.4
+offset_right = -937.8467
+offset_bottom = -499.11337
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("27_k3qy0")
+character_image = NodePath("CharacterImage")
+character_label = NodePath("QPWindow/CharacterLabel")
+previous_button = NodePath("QPWindow/LeftButton")
+next_button = NodePath("QPWindow/RightButton")
+select_button = NodePath("QPWindow/PickButton")
+
+[node name="QPWindow" type="TextureRect" parent="CanvasLayer/Quickplay"]
+z_index = 1
+layout_mode = 0
+offset_left = 697.0
+offset_top = 233.73338
+offset_right = 817.0
+offset_bottom = 377.7334
+scale = Vector2(2, 2)
+texture = ExtResource("27_ovcgw")
+
+[node name="PickButton" type="Button" parent="CanvasLayer/Quickplay/QPWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.424
+anchor_top = -0.523
+anchor_right = 2.02
+anchor_bottom = 1.5400001
+offset_left = 324.21332
+offset_top = 192.81198
+offset_right = -155.31668
+offset_bottom = -93.01007
+flat = true
+
+[node name="LeftButton" type="Button" parent="CanvasLayer/Quickplay/QPWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.4160001
+anchor_top = -0.49600002
+anchor_right = 1.983
+anchor_bottom = 1.511
+offset_left = 298.25333
+offset_top = 188.92398
+offset_right = -209.21
+offset_bottom = -88.83412
+flat = true
+
+[node name="RightButton" type="Button" parent="CanvasLayer/Quickplay/QPWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.4160001
+anchor_top = -0.49600002
+anchor_right = 1.983
+anchor_bottom = 1.511
+offset_left = 381.17
+offset_top = 188.09065
+offset_right = -126.29336
+offset_bottom = -89.66745
+flat = true
+
+[node name="CharacterLabel" type="Label" parent="CanvasLayer/Quickplay/QPWindow"]
+layout_mode = 0
+offset_left = 14.166664
+offset_top = 92.49997
+offset_right = 105.83332
+offset_bottom = 115.49997
+theme_override_fonts/font = ExtResource("4_4ls13")
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonbLabel" type="Label" parent="CanvasLayer/Quickplay/QPWindow"]
+layout_mode = 0
+offset_left = 32.083305
+offset_top = 111.24997
+offset_right = 88.083305
+offset_bottom = 134.24997
+theme_override_fonts/font = ExtResource("4_4ls13")
+theme_override_font_sizes/font_size = 10
+text = "ВЫБРАТЬ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Quickplay"]
+z_index = 1
+layout_mode = 0
+offset_left = 737.8333
+offset_top = 250.83333
+offset_right = 902.0
+offset_bottom = 413.3333
+texture = ExtResource("29_eq4af")
+stretch_mode = 4
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("25_6vdgs")

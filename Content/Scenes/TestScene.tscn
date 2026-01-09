@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dimkgr7byggox" path="res://Content/Assets/UI/Ability_curtain.png" id="11_rt42n"]
 [ext_resource type="Texture2D" uid="uid://dbv6q3yyfhnbi" path="res://Content/Assets/UI/Ability_Quiet_1.png" id="12_avgqa"]
 [ext_resource type="Texture2D" uid="uid://cdxsinqvefske" path="res://Content/Assets/UI/Manabar.png" id="14_rt42n"]
-[ext_resource type="PackedScene" uid="uid://bitbbefgr8whd" path="res://Content/Classes/Managers/PlayersManager/PlayersManager.tscn" id="15_avgqa"]
+[ext_resource type="PackedScene" uid="uid://cds15ustjlpc5" path="res://Content/Classes/Managers/PlayersManager/PlayersManager.tscn" id="15_avgqa"]
 [ext_resource type="Script" uid="uid://dn1glrubj60w7" path="res://Content/Classes/UIManagment/IngameUIManager.gd" id="15_fguma"]
 [ext_resource type="Texture2D" uid="uid://51druonmrnva" path="res://Content/Assets/UI/Settings.png" id="15_v547p"]
 [ext_resource type="Script" uid="uid://ygkicfnmw80c" path="res://Content/Classes/UIManagment/SettingsManager.gd" id="15_wborv"]
@@ -824,8 +824,7 @@ layer_2/tile_data = PackedInt32Array(4718453, 4, 0, 4652917, 4, 0, 4587381, 4, 0
 layer_3/name = "Layer3"
 layer_3/tile_data = PackedInt32Array(2490409, 327686, 12, 1114180, 327686, 12, 1179718, 327686, 12, 589862, 327686, 12, 262172, 786438, 13, 196637, 851974, 13, 589829, 1048582, 11, 393224, 1507334, 11, 327689, 1572870, 11, 524299, 720902, 12, 917507, 327686, 12, 786434, 327686, 12, 655383, 983046, 12, 1245206, 655366, 13, 983067, 655366, 13)
 
-[node name="PlayersManager" parent="." node_paths=PackedStringArray("game_hud") instance=ExtResource("15_avgqa")]
-game_hud = NodePath("HUD")
+[node name="PlayersManager" parent="." instance=ExtResource("15_avgqa")]
 
 [node name="HUD" type="Node" parent="PlayersManager" node_paths=PackedStringArray("health_bar", "damage_bar", "mana_bar", "leak_bar", "ability_cooldown")]
 script = ExtResource("8_5rbs6")
