@@ -7,6 +7,16 @@ class_name StateLocked
 # upon entering the state
 func Enter () -> void:
 	print("chat locked enter")
+	
+	var direction = Vector2.ZERO
+	var packed_direction : PackedByteArray = [0]
+	if direction.x > 0: packed_direction[0] = 128
+	if direction.x < 0: packed_direction[0] |= 32
+	if direction.y > 0: packed_direction[0] |= 8
+	if direction.y < 0: packed_direction[0] |= 2
+	print("<StateMove> : packed direction is ", packed_direction)
+	WEBSOCKET.send_byte_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_DIRECTION, packed_direction)
+	
 	its_state_object.velocity = Vector2.ZERO
 	its_state_object.modulate = Color(1, 1, 1, 0.7)
 	if "direction" in its_state_object:
@@ -19,6 +29,7 @@ func Enter () -> void:
 # upon exiting the state
 func Exit () -> void:
 	#its_state_object.modulate = Color.WHITE
+	its_state_object.modulate = Color(1, 1, 1, 1)
 	pass
 	
 	

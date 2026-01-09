@@ -12,7 +12,7 @@ var ROOM_URL : String = "127.0.0.1"
 var ROOM_WS_PORT : int = 9001
 var ROOM_ACCEPT_PORT : int = 9000
 
-var playerId : int = 1
+var playerId : int = 2
 var globalId : int 
 var roomKey : int = 222
 
