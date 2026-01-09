@@ -3,6 +3,7 @@ extends Node
 signal GameStateIsPlay
 signal GameStateIsStop
 signal GameStateIsQuit
+var should_show_results: bool = false
 
 enum GAME_STATES
 {
@@ -22,6 +23,7 @@ var game_states : GAME_STATES = GAME_STATES.INIT:
 				GameStateIsPlay.emit()
 			GAME_STATES.STOP:
 				GameStateIsStop.emit()
+				should_show_results = true
 			GAME_STATES.QUIT:
 				GameStateIsQuit.emit()
 		print("<Global> : game state changed to ", GAME_STATES.keys()[game_states])

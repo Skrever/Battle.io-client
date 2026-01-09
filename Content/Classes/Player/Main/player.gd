@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody2D
 
-#Это надо добавить в лучшей жизни. Инкапсуляцию данных он захотел, дададададад
 #enum PLAYER_STATES
 #{
 	#SHOOT,
@@ -9,28 +8,47 @@ extends CharacterBody2D
 	#DEAD
 #}
 
+
+signal _on_player_spawned 	()
+signal _on_health_changed	(new_value)
+signal _on_mana_changed		(new_value)
+signal _on_ability_used		(cooldown_time)
+signal _on_player_died		()
+
+# -- Player speed parameter
 const SPEED = 300.0
+# -- Player server id parameter
 var id : int
+# -- Player last direction for server movement
 var _last_direction : Vector2
+# -- Player direction for server movement
 var direction : Vector2:
 	get: return direction
 	set(value):
 		if value != direction:
 			direction = value
+# -- Sync with server global pos
 var sync_global_position : Vector2:
 	get : return sync_global_position
 	set(value):
 		if value != sync_global_position:
 			global_position = value
 			sync_global_position = global_position
+# -- Node for animted behaviouir
+@export var for_animation_object : AnimatedSprite2D
+# -- Node for collision behaviour
+@export var for_collision_object : CollisionShape2D
 
 func _ready() -> void:
 	add_to_group("Player")
 	Signals.PlayerDamaged.connect(get_damage)
 	Signals.PlayerKilled.connect(dead)
-
-func _physics_process(delta: float) -> void:
-	move(delta)
+	var state_machine : Node = preload("uid://18clg5181kcm").instantiate()
+	var camera : Node = Camera2D.new()
+	camera.zoom.x = 2.0
+	camera.zoom.y = 2.0
+	add_child(state_machine)
+	add_child(camera)
 
 func move(delta : float):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
@@ -55,11 +73,11 @@ func shoot():
 	print("<Player> : shoot")
 	WEBSOCKET.send_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_SHOOT,[0]) # Мы тупо отправляем на сервер команду стрелять
 	
-# можно накинуть анимацию
+
 func get_damage(player_id : int, health : int, damage : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " getted ", damage)
-# можно накинуть анимацию
+
 func dead(player_id : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " dead")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ceenn2qent2x1"]
+[gd_scene load_steps=56 format=3 uid="uid://ceenn2qent2x1"]
 
 [ext_resource type="Texture2D" uid="uid://b3gw10tts6iky" path="res://Content/Assets/Tilesets/Grass.png" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://ci6roeejn6265" path="res://Content/Classes/UIManagment/GameSceneConnector.gd" id="1_201fe"]
@@ -13,13 +13,17 @@
 [ext_resource type="Texture2D" uid="uid://dimkgr7byggox" path="res://Content/Assets/UI/Ability_curtain.png" id="11_rt42n"]
 [ext_resource type="Texture2D" uid="uid://dbv6q3yyfhnbi" path="res://Content/Assets/UI/Ability_Quiet_1.png" id="12_avgqa"]
 [ext_resource type="Texture2D" uid="uid://cdxsinqvefske" path="res://Content/Assets/UI/Manabar.png" id="14_rt42n"]
-[ext_resource type="PackedScene" uid="uid://bitbbefgr8whd" path="res://Content/Classes/Managers/PlayersManager/PlayersManager.tscn" id="15_avgqa"]
+[ext_resource type="PackedScene" uid="uid://cds15ustjlpc5" path="res://Content/Classes/Managers/PlayersManager/PlayersManager.tscn" id="15_avgqa"]
 [ext_resource type="Script" uid="uid://dn1glrubj60w7" path="res://Content/Classes/UIManagment/IngameUIManager.gd" id="15_fguma"]
+[ext_resource type="Script" uid="uid://dqmyjfy7haneo" path="res://Content/Classes/UIManagment/ChatManager.gd" id="15_tc8wi"]
 [ext_resource type="Texture2D" uid="uid://51druonmrnva" path="res://Content/Assets/UI/Settings.png" id="15_v547p"]
 [ext_resource type="Script" uid="uid://ygkicfnmw80c" path="res://Content/Classes/UIManagment/SettingsManager.gd" id="15_wborv"]
 [ext_resource type="Texture2D" uid="uid://drgyoos23823n" path="res://Content/Assets/UI/Grabber.png" id="16_wborv"]
+[ext_resource type="Texture2D" uid="uid://cv6jc0teipyrg" path="res://Content/Assets/UI/field_frame.png" id="17_ma4qr"]
 [ext_resource type="Texture2D" uid="uid://54jquvqkpsi7" path="res://Content/Assets/UI/Slider.png" id="17_nfl3x"]
 [ext_resource type="Texture2D" uid="uid://cg85gp08055om" path="res://Content/Assets/UI/Ingame-menu.png" id="18_ho3ri"]
+[ext_resource type="Texture2D" uid="uid://orkosjl2hhud" path="res://Content/Assets/UI/chat_toggler.png" id="18_r08f0"]
+[ext_resource type="Texture2D" uid="uid://bmdt0ct1nyxvi" path="res://Content/Assets/UI/chat_frame.png" id="19_cfcq1"]
 [ext_resource type="Texture2D" uid="uid://cqjuro4sygi3g" path="res://Content/Assets/UI/Grabber_highlight.png" id="19_naoyn"]
 [ext_resource type="Texture2D" uid="uid://c0ewqct877f5p" path="res://Content/Assets/UI/Button.png" id="21_tlt8b"]
 [ext_resource type="FontFile" uid="uid://2lp54jjc5bhb" path="res://Content/Assets/Fonts/zx_spectrum-7_bold.ttf" id="22_axmst"]
@@ -709,6 +713,221 @@ bg_color = Color(0.952941, 0.396078, 0.364706, 0.917647)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt42n"]
 bg_color = Color(0, 0.501961, 0.996078, 1)
 
+[sub_resource type="Animation" id="Animation_tc8wi"]
+resource_name = "chat_expand"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChatLine:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(471, 831), Vector2(471, 685)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChatTable:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(461, 725), Vector2(461, 579)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ChatFrame:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(461, 720), Vector2(461, 574)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TogglerButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(639, 692), Vector2(639, 546)]
+}
+
+[sub_resource type="Animation" id="Animation_ma4qr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChatLine:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(471, 831)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChatTable:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(461, 725)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ChatFrame:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(461, 734)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TogglerButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(639, 692)]
+}
+
+[sub_resource type="Animation" id="Animation_r08f0"]
+resource_name = "chat_collapse"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChatTable:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(461, 579), Vector2(461, 725)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChatLine:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(471, 685), Vector2(471, 831)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TogglerButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(639, 546), Vector2(639, 692)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ChatFrame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(461, 574), Vector2(461, 720), Vector2(461, 733)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cfcq1"]
+_data = {
+&"RESET": SubResource("Animation_ma4qr"),
+&"chat_collapse": SubResource("Animation_r08f0"),
+&"chat_expand": SubResource("Animation_tc8wi")
+}
+
+[sub_resource type="Animation" id="Animation_o5y3f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TogglerButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tgwqx"]
+resource_name = "hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TogglerButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_0w78i"]
+resource_name = "unhover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TogglerButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tc8wi"]
+_data = {
+&"RESET": SubResource("Animation_o5y3f"),
+&"button_hover": SubResource("Animation_tgwqx"),
+&"button_unhover": SubResource("Animation_0w78i")
+}
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fguma"]
 texture = ExtResource("17_nfl3x")
 
@@ -824,8 +1043,7 @@ layer_2/tile_data = PackedInt32Array(4718453, 4, 0, 4652917, 4, 0, 4587381, 4, 0
 layer_3/name = "Layer3"
 layer_3/tile_data = PackedInt32Array(2490409, 327686, 12, 1114180, 327686, 12, 1179718, 327686, 12, 589862, 327686, 12, 262172, 786438, 13, 196637, 851974, 13, 589829, 1048582, 11, 393224, 1507334, 11, 327689, 1572870, 11, 524299, 720902, 12, 917507, 327686, 12, 786434, 327686, 12, 655383, 983046, 12, 1245206, 655366, 13, 983067, 655366, 13)
 
-[node name="PlayersManager" parent="." node_paths=PackedStringArray("game_hud") instance=ExtResource("15_avgqa")]
-game_hud = NodePath("HUD")
+[node name="PlayersManager" parent="." instance=ExtResource("15_avgqa")]
 
 [node name="HUD" type="Node" parent="PlayersManager" node_paths=PackedStringArray("health_bar", "damage_bar", "mana_bar", "leak_bar", "ability_cooldown")]
 script = ExtResource("8_5rbs6")
@@ -953,29 +1171,135 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("14_rt42n")
 
-[node name="IngameUI" type="Control" parent="PlayersManager" node_paths=PackedStringArray("ingame_settings", "ingame_menu", "ingame_animator")]
+[node name="IngameChat" type="Control" parent="PlayersManager/HUD/HUD" node_paths=PackedStringArray("chat_field", "chat_table", "chat_animator", "toggler_animator", "chat_toggler")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1276.0
-offset_bottom = 718.0
+anchor_left = 0.5
+anchor_top = 0.9850001
+anchor_right = 0.5
+anchor_bottom = 0.9850001
+offset_left = -640.0
+offset_top = -709.2001
+offset_right = 640.0
+offset_bottom = 10.799927
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_tc8wi")
+chat_field = NodePath("ChatLine")
+chat_table = NodePath("ChatTable")
+chat_animator = NodePath("ChatAnimator")
+toggler_animator = NodePath("TogglerAnimator")
+chat_toggler = NodePath("TogglerButton")
+metadata/_edit_use_anchors_ = true
+
+[node name="ChatTable" type="TextEdit" parent="PlayersManager/HUD/HUD/IngameChat"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.025
+anchor_right = -0.025
+offset_left = 493.0
+offset_top = 725.0
+offset_right = 893.0
+offset_bottom = 825.0
+editable = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ChatLine" type="LineEdit" parent="PlayersManager/HUD/HUD/IngameChat"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0265625
+anchor_top = -0.20277777
+anchor_right = -0.0265625
+anchor_bottom = -0.20277777
+offset_left = 505.0
+offset_top = 977.0
+offset_right = 885.0
+offset_bottom = 1008.0
+metadata/_edit_use_anchors_ = true
+
+[node name="LineFrame" type="TextureRect" parent="PlayersManager/HUD/HUD/IngameChat/ChatLine"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.345
+anchor_top = -26.806002
+anchor_right = -1.345
+anchor_bottom = -26.806002
+offset_left = 510.1
+offset_top = 830.986
+offset_right = 702.1
+offset_bottom = 846.986
+scale = Vector2(2, 2)
+texture = ExtResource("17_ma4qr")
+metadata/_edit_use_anchors_ = true
+
+[node name="ChatAnimator" type="AnimationPlayer" parent="PlayersManager/HUD/HUD/IngameChat"]
+libraries = {
+&"": SubResource("AnimationLibrary_cfcq1")
+}
+
+[node name="TogglerAnimator" type="AnimationPlayer" parent="PlayersManager/HUD/HUD/IngameChat"]
+libraries = {
+&"": SubResource("AnimationLibrary_tc8wi")
+}
+
+[node name="TogglerButton" type="TextureButton" parent="PlayersManager/HUD/HUD/IngameChat"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.025
+anchor_right = -0.025
+offset_left = 671.0
+offset_top = 692.0
+offset_right = 731.0
+offset_bottom = 720.0
+pivot_offset = Vector2(30, 14)
+texture_normal = ExtResource("18_r08f0")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="ChatFrame" type="TextureRect" parent="PlayersManager/HUD/HUD/IngameChat"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.025
+anchor_top = 0.0375
+anchor_right = -0.025
+anchor_bottom = 0.0375
+offset_left = 493.0
+offset_top = 707.0
+offset_right = 693.0
+offset_bottom = 761.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("19_cfcq1")
+metadata/_edit_use_anchors_ = true
+
+[node name="IngameUI" type="Control" parent="PlayersManager/HUD/HUD" node_paths=PackedStringArray("ingame_settings", "ingame_menu", "ingame_animator")]
+layout_mode = 3
+anchor_left = 1.2010001
+anchor_top = 0.517
+anchor_right = 1.2010001
+anchor_bottom = 0.52811116
+offset_left = -1537.2802
+offset_top = -372.24002
+offset_right = -260.28015
+offset_bottom = 345.75998
 size_flags_horizontal = 4
+mouse_filter = 2
 script = ExtResource("15_fguma")
 ingame_settings = NodePath("CanvasLayer/IngameSettings")
 ingame_menu = NodePath("CanvasLayer/IngameMenu")
 ingame_animator = NodePath("CanvasLayer/IngameUIAnimator")
+metadata/_edit_use_anchors_ = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="PlayersManager/IngameUI"]
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayersManager/HUD/HUD/IngameUI"]
 
-[node name="IngameSettings" type="Control" parent="PlayersManager/IngameUI/CanvasLayer" node_paths=PackedStringArray("music_slider", "audio_slider")]
+[node name="IngameSettings" type="Control" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer" node_paths=PackedStringArray("music_slider", "audio_slider")]
 layout_mode = 3
-anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -802.0
 offset_top = -580.0
-offset_right = -762.0
+offset_right = -762.00024
 offset_bottom = -540.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -985,7 +1309,7 @@ bus_name_audio = "Audio"
 music_slider = NodePath("SettingsWindow/MusicSlider")
 audio_slider = NodePath("SettingsWindow/AudioSlider")
 
-[node name="SettingsWindow" type="TextureRect" parent="PlayersManager/IngameUI/CanvasLayer/IngameSettings"]
+[node name="SettingsWindow" type="TextureRect" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 20.300001
@@ -995,12 +1319,10 @@ anchor_bottom = 10.745001
 offset_left = -6.1035156e-05
 offset_right = -230.40015
 offset_bottom = -172.80005
-grow_horizontal = 0
-grow_vertical = 0
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("15_v547p")
 
-[node name="MusicSlider" type="HSlider" parent="PlayersManager/IngameUI/CanvasLayer/IngameSettings/SettingsWindow"]
+[node name="MusicSlider" type="HSlider" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings/SettingsWindow"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 25.5
@@ -1014,7 +1336,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_tlt8b")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_axmst")
 step = 3.0
 
-[node name="AudioSlider" type="HSlider" parent="PlayersManager/IngameUI/CanvasLayer/IngameSettings/SettingsWindow"]
+[node name="AudioSlider" type="HSlider" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings/SettingsWindow"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 60.5
@@ -1028,21 +1350,21 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_tlt8b")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_axmst")
 step = 3.0
 
-[node name="IngameMenu" type="Control" parent="PlayersManager/IngameUI/CanvasLayer"]
+[node name="IngameMenu" type="Control" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer"]
 layout_mode = 3
-anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -902.0
 offset_top = -720.0
-offset_right = -862.0
+offset_right = -861.99976
 offset_bottom = -680.0
 grow_horizontal = 0
 grow_vertical = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="MenuWindow" type="TextureRect" parent="PlayersManager/IngameUI/CanvasLayer/IngameMenu"]
+[node name="MenuWindow" type="TextureRect" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 23.375002
@@ -1057,7 +1379,7 @@ grow_vertical = 0
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("18_ho3ri")
 
-[node name="BackButton" type="TextureButton" parent="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow"]
+[node name="BackButton" type="TextureButton" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow"]
 layout_mode = 0
 offset_left = 12.857142
 offset_top = 12.857147
@@ -1067,7 +1389,7 @@ texture_normal = ExtResource("21_tlt8b")
 texture_pressed = ExtResource("22_naoyn")
 texture_hover = ExtResource("23_rmix1")
 
-[node name="Label" type="Label" parent="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow/BackButton"]
+[node name="Label" type="Label" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/BackButton"]
 layout_mode = 0
 offset_top = -6.7857137
 offset_right = 96.07141
@@ -1078,7 +1400,7 @@ text = "НАЗАД"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="QuitButton" type="TextureButton" parent="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow"]
+[node name="QuitButton" type="TextureButton" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow"]
 layout_mode = 0
 offset_left = 12.5
 offset_top = 42.85714
@@ -1088,7 +1410,7 @@ texture_normal = ExtResource("21_tlt8b")
 texture_pressed = ExtResource("22_naoyn")
 texture_hover = ExtResource("23_rmix1")
 
-[node name="Label" type="Label" parent="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow/QuitButton"]
+[node name="Label" type="Label" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/QuitButton"]
 layout_mode = 0
 offset_left = 0.35714722
 offset_top = -6.785703
@@ -1100,7 +1422,7 @@ text = "ВЫЙТИ"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="IngameUIAnimator" type="AnimationPlayer" parent="PlayersManager/IngameUI/CanvasLayer"]
+[node name="IngameUIAnimator" type="AnimationPlayer" parent="PlayersManager/HUD/HUD/IngameUI/CanvasLayer"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_axmst")
@@ -1113,6 +1435,6 @@ bus = &"Music"
 parameters/looping = true
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="value_changed" from="PlayersManager/IngameUI/CanvasLayer/IngameSettings/SettingsWindow/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="pressed" from="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow/BackButton" to="PlayersManager/IngameUI" method="_on_back_button_pressed"]
-[connection signal="pressed" from="PlayersManager/IngameUI/CanvasLayer/IngameMenu/MenuWindow/QuitButton" to="PlayersManager/IngameUI" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings/SettingsWindow/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/BackButton" to="PlayersManager/HUD/HUD/IngameUI" method="_on_back_button_pressed"]
+[connection signal="pressed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/QuitButton" to="PlayersManager/HUD/HUD/IngameUI" method="_on_quit_button_pressed"]

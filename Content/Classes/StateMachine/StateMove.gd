@@ -34,6 +34,7 @@ func Update (_delta):
 # Use: Updation of the physical parameters  of the player
 func Physics_update (_delta):
 	direction = Input.get_vector("left", "right", "up", "down")
+	print("<StateMove> : physics update - moving")
 	if direction != _last_direction: 
 		_last_direction = direction
 		
@@ -42,13 +43,13 @@ func Physics_update (_delta):
 		if direction.x < 0: packed_direction[0] |= 32
 		if direction.y > 0: packed_direction[0] |= 8
 		if direction.y < 0: packed_direction[0] |= 2
-		print("<Player> : packed direction is ", packed_direction)
+		print("<StateMove> : packed direction is ", packed_direction)
 		WEBSOCKET.send_byte_binary_data(WEBSOCKET.SEND_COMMAND.PLAYER_DIRECTION, packed_direction)
 	if (direction == Vector2.ZERO):
 		its_state_machine.Change_state("stateidle")
 		return
 		
-	its_state_object.velocity = direction * its_state_object.stat_speed
+	its_state_object.velocity = direction * its_state_object.SPEED
 	its_state_object.move_and_slide()
 	
 	if 	 (direction.x > 0):
