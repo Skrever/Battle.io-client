@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3ly5kwtp0nbm"]
+
+[ext_resource type="Script" uid="uid://d1jmhfboxpv47" path="res://Content/Classes/StateMachine/StateMachine.gd" id="1_4740t"]
+[ext_resource type="Script" uid="uid://bfkwg50k4edwa" path="res://Content/Classes/StateMachine/StateArtificialMove.gd" id="2_ochwo"]
+[ext_resource type="Script" uid="uid://b2f0vn38ikt0m" path="res://Content/Classes/StateMachine/StateIdle.gd" id="3_f2db0"]
+
+[node name="StateMachineAnother" type="Node"]
+script = ExtResource("1_4740t")
+metadata/_custom_type_script = "uid://d1jmhfboxpv47"
+
+[node name="StateArtificialMove" type="Node" parent="."]
+script = ExtResource("2_ochwo")
+metadata/_custom_type_script = "uid://bfkwg50k4edwa"
+
+[node name="StateIdle" type="Node" parent="."]
+script = ExtResource("3_f2db0")
+metadata/_custom_type_script = "uid://b2f0vn38ikt0m"
