@@ -16,6 +16,7 @@ extends Node2D
 
 func _ready () -> void:
 	CLIENT.get_room()
+	#CLIENT.accept_session()
 	Global.GameStateIsStop.connect(_on_game_stop)
 	
 func _on_game_stop () -> void:
