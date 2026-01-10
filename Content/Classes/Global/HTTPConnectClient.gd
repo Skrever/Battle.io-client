@@ -12,7 +12,7 @@ var ROOM_URL : String = "127.0.0.1"
 var ROOM_WS_PORT : int = 9001
 var ROOM_ACCEPT_PORT : int = 9000
 
-var playerId : int = 1
+var playerId : int = 2
 var globalId : int 
 var roomKey : int = 222
 
@@ -28,7 +28,7 @@ var _new_room_requester : HTTPRequest = HTTPRequest.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#playerId = randi_range(2, 5)
+	playerId = randi_range(1, 55)
 	add_child(_room_accepter)
 	_room_accepter.request_completed.connect(_accept_session_response)
 	

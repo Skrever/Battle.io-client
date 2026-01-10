@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 		while socket.get_available_packet_count() > 0:
 			match socket.get_ready_state():
 				WebSocketPeer.STATE_OPEN:
-					#print("<Websocket> : packet is ",socket.get_packet())
+					print("<Websocket> : packet is ",socket.get_packet())
 					analyze_receive_data(socket.get_packet())
 				WebSocketPeer.STATE_CLOSING:
 					print("<Websocket> : connection closing...")
@@ -140,7 +140,7 @@ func send_byte_binary_data(command : SEND_COMMAND, data : PackedByteArray):
 				#pack data
 				bytes.append_array(data)
 				
-				print("<Websocket> : raw byte is ", bytes, " and size send data is ", bytes.size())
+				#print("<Websocket> : raw byte is ", bytes, " and size send data is ", bytes.size())
 				socket.send(bytes)
 				
 			WebSocketPeer.STATE_CLOSING:
@@ -151,6 +151,12 @@ func send_byte_binary_data(command : SEND_COMMAND, data : PackedByteArray):
 			_:
 				pass
 	mutex_socket.unlock()
+	
+func send_string(command : SEND_COMMAND, data : String):
+	match command:
+		SEND_COMMAND.MESSAGE:
+			var byte_data : PackedByteArray = data.to_utf16_buffer()
+			send_byte_binary_data(command, byte_data)
 
 func _connect_url(url : String) -> WebSocketPeer:
 	var current_socket : WebSocketPeer = WebSocketPeer.new()
@@ -200,6 +206,7 @@ func analyze_receive_data(packet : PackedByteArray):
 		RECEIVE_COMMAND.PLAYER_DIRECTION:
 			GAME_DATA.mutexPlayersDirection.lock()
 			GAME_DATA.players_direction[entity_id] = _get_direction_from_byte(packet, 5)
+			#print("<Websocket> : get direction: ", packet)
 			GAME_DATA.mutexPlayersDirection.unlock()
 		
 		# Get damage of any player
