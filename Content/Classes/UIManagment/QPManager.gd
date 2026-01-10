@@ -16,7 +16,6 @@ func _ready () -> void:
 	previous_button.pressed.connect(Get_previous_character)
 	next_button.pressed.connect(Get_next_character)
 	select_button.pressed.connect(Select_character)
-	Global.GameStateIsPlay.connect(Navigate_to_arena)
 	
 func Load_characters () -> void:
 	characters = [
@@ -47,7 +46,4 @@ func Select_character () -> void:
 	selected_character = characters[current_index].name
 	ThisClient.selected_character = selected_character
 	print("<QPManager> : Character selected ", selected_character)
-	get_tree().change_scene_to_file("res://Content/Scenes/TestScene.tscn")
-
-func Navigate_to_arena () -> void:
 	get_tree().change_scene_to_file("res://Content/Scenes/TestScene.tscn")

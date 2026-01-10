@@ -35,7 +35,6 @@ func _ready () -> void:
 	Register_menu("LEADERBOARD", menu_section_leaderboard)
 	Register_menu("QUICKPLAY", 	 menu_quickplay)
 	Register_menu("RESULT", 	 menu_result)
-	Register_menu("MATCHMAKING", menu_matchmaking)
 	
 	menu_label.text = "ГЛАВНОЕ МЕНЮ"
 	
@@ -99,7 +98,3 @@ func _on_back_pressed() -> void:
 	# to show game statisctics
 	# SERVER_get_match_results () 
 	# --- # ----
-	
-func _on_pick_pressed():
-	Show_menu("MATCHMAKING")
-	menu_section_main.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ceenn2qent2x1"]
+[gd_scene load_steps=95 format=3 uid="uid://ceenn2qent2x1"]
 
 [ext_resource type="Texture2D" uid="uid://b3gw10tts6iky" path="res://Content/Assets/Tilesets/Grass.png" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://ci6roeejn6265" path="res://Content/Classes/UIManagment/GameSceneConnector.gd" id="1_201fe"]
@@ -8,16 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://d24j6ow5ejf1v" path="res://Content/Assets/Tilesets/Hills.png" id="5_qsjrb"]
 [ext_resource type="Texture2D" uid="uid://m6m1xkthf2k1" path="res://Content/Assets/Tilesets/GRASS+.png" id="6_c264a"]
 [ext_resource type="Script" uid="uid://c16g8kwabtumd" path="res://Content/Classes/UIManagment/GameHUD.gd" id="8_5rbs6"]
+[ext_resource type="Texture2D" uid="uid://but752aoaf60s" path="res://Content/Assets/UI/matchmaking_window.png" id="10_8j5bj"]
 [ext_resource type="Texture2D" uid="uid://clvi5niu65w0b" path="res://Content/Assets/UI/Ability_holder.png" id="10_mt481"]
 [ext_resource type="Texture2D" uid="uid://djbrlmbl6vn4r" path="res://Content/Assets/UI/Healthbar.png" id="11_fo1ni"]
+[ext_resource type="Texture2D" uid="uid://cdbksw541gahq" path="res://Content/Assets/UI/progress_circle.png" id="11_j0i5c"]
 [ext_resource type="Texture2D" uid="uid://dimkgr7byggox" path="res://Content/Assets/UI/Ability_curtain.png" id="11_rt42n"]
 [ext_resource type="Texture2D" uid="uid://dbv6q3yyfhnbi" path="res://Content/Assets/UI/Ability_Quiet_1.png" id="12_avgqa"]
+[ext_resource type="Texture2D" uid="uid://5ks2st5d7ri2" path="res://Content/Assets/UI/Background/Background.png" id="12_h48n0"]
+[ext_resource type="Texture2D" uid="uid://cyn7pgefypnnf" path="res://Content/Assets/UI/Background/BG-Idle1.png" id="13_gk7br"]
 [ext_resource type="Texture2D" uid="uid://cdxsinqvefske" path="res://Content/Assets/UI/Manabar.png" id="14_rt42n"]
+[ext_resource type="Texture2D" uid="uid://m5qscjw5mvva" path="res://Content/Assets/UI/Background/BG-Idle2.png" id="14_yo88s"]
 [ext_resource type="PackedScene" uid="uid://cds15ustjlpc5" path="res://Content/Classes/Managers/PlayersManager/PlayersManager.tscn" id="15_avgqa"]
+[ext_resource type="Texture2D" uid="uid://spqscyp8plps" path="res://Content/Assets/UI/Background/BG-Idle3.png" id="15_ec347"]
 [ext_resource type="Script" uid="uid://dn1glrubj60w7" path="res://Content/Classes/UIManagment/IngameUIManager.gd" id="15_fguma"]
 [ext_resource type="Script" uid="uid://dqmyjfy7haneo" path="res://Content/Classes/UIManagment/ChatManager.gd" id="15_tc8wi"]
 [ext_resource type="Texture2D" uid="uid://51druonmrnva" path="res://Content/Assets/UI/Settings.png" id="15_v547p"]
 [ext_resource type="Script" uid="uid://ygkicfnmw80c" path="res://Content/Classes/UIManagment/SettingsManager.gd" id="15_wborv"]
+[ext_resource type="Script" uid="uid://dckov4qr6eevd" path="res://Content/Classes/UIManagment/BackgroundManager.gd" id="16_6qn1p"]
 [ext_resource type="Texture2D" uid="uid://drgyoos23823n" path="res://Content/Assets/UI/Grabber.png" id="16_wborv"]
 [ext_resource type="Texture2D" uid="uid://cv6jc0teipyrg" path="res://Content/Assets/UI/field_frame.png" id="17_ma4qr"]
 [ext_resource type="Texture2D" uid="uid://54jquvqkpsi7" path="res://Content/Assets/UI/Slider.png" id="17_nfl3x"]
@@ -705,6 +712,240 @@ sources/4 = SubResource("TileSetAtlasSource_6xh1p")
 sources/5 = SubResource("TileSetAtlasSource_5rbs6")
 sources/6 = SubResource("TileSetAtlasSource_201fe")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbtkp"]
+atlas = ExtResource("11_j0i5c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nloa8"]
+atlas = ExtResource("11_j0i5c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyxp5"]
+atlas = ExtResource("11_j0i5c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjg8j"]
+atlas = ExtResource("11_j0i5c")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ydlg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbtkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nloa8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyxp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjg8j")
+}],
+"loop": true,
+"name": &"progress",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiu1e"]
+atlas = ExtResource("12_h48n0")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwm1n"]
+atlas = ExtResource("13_gk7br")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evxs1"]
+atlas = ExtResource("13_gk7br")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4855k"]
+atlas = ExtResource("13_gk7br")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnhaw"]
+atlas = ExtResource("13_gk7br")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jnq7"]
+atlas = ExtResource("13_gk7br")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2bqy"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vdgs"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b64ag"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drfiy"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovcgw"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3qy0"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(2880, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq4af"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(3456, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkwvo"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(4032, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8gk5"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(4608, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pot4p"]
+atlas = ExtResource("14_yo88s")
+region = Rect2(5184, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j6l0"]
+atlas = ExtResource("15_ec347")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1c7k"]
+atlas = ExtResource("15_ec347")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mute0"]
+atlas = ExtResource("15_ec347")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clpa6"]
+atlas = ExtResource("15_ec347")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53lyk"]
+atlas = ExtResource("15_ec347")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky1bw"]
+atlas = ExtResource("15_ec347")
+region = Rect2(2880, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rau6h"]
+atlas = ExtResource("15_ec347")
+region = Rect2(3456, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idnka"]
+atlas = ExtResource("15_ec347")
+region = Rect2(4032, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0881"]
+atlas = ExtResource("15_ec347")
+region = Rect2(4608, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uu5x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiu1e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwm1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evxs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4855k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnhaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jnq7")
+}],
+"loop": false,
+"name": &"idle_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2bqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vdgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b64ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drfiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovcgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3qy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq4af")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkwvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8gk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pot4p")
+}],
+"loop": false,
+"name": &"idle_2",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j6l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1c7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mute0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clpa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53lyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ky1bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rau6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idnka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0881")
+}],
+"loop": false,
+"name": &"idle_3",
+"speed": 8.0
+}]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yp6n"]
 bg_color = Color(0.501961, 0, 0, 1)
 
@@ -1028,8 +1269,10 @@ _data = {
 &"show": SubResource("Animation_fguma")
 }
 
-[node name="TestScene" type="Node2D"]
+[node name="TestScene" type="Node2D" node_paths=PackedStringArray("menu_matchmaking", "menu_ingame_ui")]
 script = ExtResource("1_201fe")
+menu_matchmaking = NodePath("PlayersManager/HUD/HUD/MatchMenu")
+menu_ingame_ui = NodePath("PlayersManager/HUD/HUD/IngameUI")
 
 [node name="TileMap" type="TileMap" parent="."]
 rotation = 0.000387972
@@ -1057,6 +1300,36 @@ ability_cooldown = NodePath("HUD/Ability/AbilityHolder/AbilityCooldown")
 ability_icon = NodePath("HUD/Ability/AbilityHolder/AbilityIcon")
 
 [node name="HUD" type="CanvasLayer" parent="PlayersManager/HUD"]
+
+[node name="MatchMenu" type="Control" parent="PlayersManager/HUD/HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Matchmaking" type="TextureRect" parent="PlayersManager/HUD/HUD/MatchMenu"]
+z_index = 4
+layout_mode = 0
+offset_left = 298.66675
+offset_top = 184.56667
+offset_right = 554.66675
+offset_bottom = 312.56665
+scale = Vector2(3, 3)
+texture = ExtResource("10_8j5bj")
+
+[node name="ProgressCircle" type="AnimatedSprite2D" parent="PlayersManager/HUD/HUD/MatchMenu/Matchmaking"]
+z_index = 2
+position = Vector2(82.22218, 57.22222)
+sprite_frames = SubResource("SpriteFrames_1ydlg")
+animation = &"progress"
+autoplay = "progress"
+
+[node name="Backgroundnd" type="AnimatedSprite2D" parent="PlayersManager/HUD/HUD/MatchMenu"]
+z_index = 3
+position = Vector2(607.3, 342.31546)
+scale = Vector2(2.5163193, 2.5289168)
+sprite_frames = SubResource("SpriteFrames_6uu5x")
+script = ExtResource("16_6qn1p")
 
 [node name="HealthBar" type="Control" parent="PlayersManager/HUD/HUD"]
 layout_mode = 3
@@ -1127,6 +1400,7 @@ fill_mode = 2
 texture_progress = ExtResource("11_rt42n")
 
 [node name="AbilityIcon" type="TextureRect" parent="PlayersManager/HUD/HUD/Ability/AbilityHolder"]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.123
@@ -1275,6 +1549,7 @@ texture = ExtResource("19_cfcq1")
 metadata/_edit_use_anchors_ = true
 
 [node name="IngameUI" type="Control" parent="PlayersManager/HUD/HUD" node_paths=PackedStringArray("ingame_settings", "ingame_menu", "ingame_animator")]
+visible = false
 layout_mode = 3
 anchor_left = 1.2010001
 anchor_top = 0.517
@@ -1444,6 +1719,7 @@ script = ExtResource("31_ma4qr")
 metadata/_custom_type_script = "uid://btileprm15chm"
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="animation_finished" from="PlayersManager/HUD/HUD/MatchMenu/Backgroundnd" to="PlayersManager/HUD/HUD/MatchMenu/Backgroundnd" method="_on_animation_finished"]
 [connection signal="value_changed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings/SettingsWindow/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="pressed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/BackButton" to="PlayersManager/HUD/HUD/IngameUI" method="_on_back_button_pressed"]
 [connection signal="pressed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameMenu/MenuWindow/QuitButton" to="PlayersManager/HUD/HUD/IngameUI" method="_on_quit_button_pressed"]

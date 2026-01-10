@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://bk2sw51iswc8e"]
+[gd_scene load_steps=74 format=3 uid="uid://bk2sw51iswc8e"]
 
 [ext_resource type="Script" uid="uid://41wepuuba76j" path="res://Content/Classes/UIManagment/UIManager.gd" id="1_hcmuh"]
 [ext_resource type="Texture2D" uid="uid://5ks2st5d7ri2" path="res://Content/Assets/UI/Background/Background.png" id="2_4t6kl"]
@@ -32,8 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://cvxjc4kfq8bs0" path="res://Content/Assets/Testable/quiet_sprite.png" id="29_eq4af"]
 [ext_resource type="Texture2D" uid="uid://bbbbu7b0e13rm" path="res://Content/Assets/UI/Result_window.png" id="30_qkwvo"]
 [ext_resource type="Script" uid="uid://io4atlepc1nb" path="res://Content/Classes/UIManagment/ResultsManager.gd" id="30_t8gk5"]
-[ext_resource type="Texture2D" uid="uid://but752aoaf60s" path="res://Content/Assets/UI/matchmaking_window.png" id="32_n1c7k"]
-[ext_resource type="Texture2D" uid="uid://cdbksw541gahq" path="res://Content/Assets/UI/progress_circle.png" id="33_mute0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiu1e"]
 atlas = ExtResource("2_4t6kl")
@@ -739,42 +737,6 @@ _data = {
 &"button_unhover": SubResource("Animation_eq4af")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pbtkp"]
-atlas = ExtResource("33_mute0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nloa8"]
-atlas = ExtResource("33_mute0")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyxp5"]
-atlas = ExtResource("33_mute0")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjg8j"]
-atlas = ExtResource("33_mute0")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nuswl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pbtkp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nloa8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pyxp5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mjg8j")
-}],
-"loop": true,
-"name": &"progress",
-"speed": 10.0
-}]
-
 [node name="UISegment" type="Control" node_paths=PackedStringArray("menu_section_main", "menu_section_settings", "menu_section_leaderboard", "menu_label", "menu_quickplay", "menu_result", "menu_matchmaking", "animator_main", "animator_settings", "animator_leaderboard")]
 z_index = -1
 texture_filter = 1
@@ -796,7 +758,7 @@ menu_section_leaderboard = NodePath("CanvasLayer/Leaderboard/LeaderboardWindow")
 menu_label = NodePath("CanvasLayer/Menu/MenuWindow/Label")
 menu_quickplay = NodePath("CanvasLayer/Quickplay")
 menu_result = NodePath("CanvasLayer/GameResults")
-menu_matchmaking = NodePath("CanvasLayer/Matchmaking")
+menu_matchmaking = NodePath("")
 animator_main = NodePath("CanvasLayer/Main/animator")
 animator_settings = NodePath("CanvasLayer/Settings/animator")
 animator_leaderboard = NodePath("CanvasLayer/Leaderboard/animator")
@@ -1425,30 +1387,6 @@ theme_override_fonts/font = ExtResource("4_4ls13")
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Matchmaking" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -107.0
-offset_top = -75.4
-offset_right = -67.0
-offset_bottom = -35.4
-
-[node name="Matchmaking" type="TextureRect" parent="CanvasLayer/Matchmaking"]
-layout_mode = 0
-offset_left = 298.66675
-offset_top = 184.56667
-offset_right = 554.66675
-offset_bottom = 312.56665
-scale = Vector2(3, 3)
-texture = ExtResource("32_n1c7k")
-
-[node name="ProgressCircle" type="AnimatedSprite2D" parent="CanvasLayer/Matchmaking/Matchmaking"]
-position = Vector2(82.22218, 57.22222)
-sprite_frames = SubResource("SpriteFrames_nuswl")
-animation = &"progress"
-autoplay = "progress"
-frame_progress = 0.50080794
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("25_6vdgs")
