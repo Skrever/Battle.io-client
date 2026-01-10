@@ -22,10 +22,10 @@ func _process(delta: float) -> void:
 	GAME_DATA.mutexPlayersDirection.lock()
 	for player_index : int in GAME_DATA.players_direction.keys():
 		if !players.has(player_index): 
-			#print("<Players Manager> : skip set direction, hasn't player index: ", player_index)
+			print("<Players Manager> : skip set direction, hasn't player index: ", player_index)
 			continue
 		if player_index == CLIENT.globalId: 
-			#print("<Players Manager> : player_index == CLIENT.globalId, player_index is ", player_index, " and globalId is ", CLIENT.globalId)
+			print("<Players Manager> : player_index == CLIENT.globalId, player_index is ", player_index, " and globalId is ", CLIENT.globalId)
 			continue
 		if players[player_index].direction != GAME_DATA.players_direction[player_index]:
 			players[player_index].direction = GAME_DATA.players_direction[player_index]

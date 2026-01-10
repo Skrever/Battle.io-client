@@ -1,5 +1,6 @@
 extends Node
 
+signal GameStateIsInit
 signal GameStateIsPlay
 signal GameStateIsStop
 signal GameStateIsQuit
@@ -19,6 +20,8 @@ var game_states : GAME_STATES = GAME_STATES.INIT:
 		if value == game_states: return
 		game_states = value
 		match value:
+			GAME_STATES.INIT:
+				GameStateIsInit.emit()
 			GAME_STATES.PLAY:
 				GameStateIsPlay.emit()
 			GAME_STATES.STOP:

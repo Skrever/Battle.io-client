@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ENUMS="*res://Content/Classes/Global/enums.gd"
 Signals="*res://Content/Classes/Global/Signals.gd"
+ENUMS="*res://Content/Classes/Global/enums.gd"
 Global="*res://Content/Classes/Global/Global.gd"
 WEBSOCKET="*res://Content/Classes/Global/WebSocketConnect.gd"
-CLIENT="*res://Content/Classes/Global/HTTPConnectClient.gd"
 GAME_DATA="*res://Content/Classes/Global/game_data.gd"
+CLIENT="*res://Content/Classes/Global/HTTPConnectClient.gd"
 ThisClient="*res://Content/Classes/Global/ThisClient.gd"
 
 [display]

@@ -18,6 +18,8 @@ func _ready () -> void:
 	CLIENT.get_room()
 	#CLIENT.accept_session()
 	Global.GameStateIsStop.connect(_on_game_stop)
+	await get_tree().create_timer(2).timeout
+	WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, "Привет, я 🌸asd🌸")
 	
 func _on_game_stop () -> void:
 	get_tree().change_scene_to_file("res://Content/UI/UISegment.tscn")
