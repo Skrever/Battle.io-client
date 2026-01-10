@@ -39,8 +39,10 @@ func Update (_delta):
 		elif Input.is_action_just_pressed("attack_1"):
 			its_state_machine.Change_state("statedashattack")
 	else:
+		#print("<StateIdle> : anotherplayer dir ", its_state_object.direction)
 		if its_state_object.direction != Vector2.ZERO:
 			its_state_machine.Change_state("statemove")
+			return
 	its_state_object.for_animation_object.play("idle")
 
 # / Physics update function /

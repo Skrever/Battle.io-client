@@ -21,6 +21,7 @@ var label_current : Node = null
 @export var menu_label 				 : Control
 @export var menu_quickplay 		     : Control
 @export var menu_result				 : Control
+@export var menu_matchmaking		 : Control
 # -- Export animators for Menu
 @export var animator_main			 : AnimationPlayer
 @export var animator_settings		 : AnimationPlayer
@@ -34,6 +35,7 @@ func _ready () -> void:
 	Register_menu("LEADERBOARD", menu_section_leaderboard)
 	Register_menu("QUICKPLAY", 	 menu_quickplay)
 	Register_menu("RESULT", 	 menu_result)
+	Register_menu("MATCHMAKING", menu_matchmaking)
 	
 	menu_label.text = "ГЛАВНОЕ МЕНЮ"
 	
@@ -44,6 +46,8 @@ func _ready () -> void:
 		menu_label.text = "ИГРА ОКОНЧЕНА"
 	else:
 		Show_menu("MAIN")
+		
+	#Global.GameStateIsQuit.connect()
 
 # --- Function for registrating a section in menus dictionary
 # makes section one of the UIManager's sections
@@ -63,6 +67,9 @@ func Show_menu (menu_key : String) -> void:
 	menu_current = menus[menu_key]
 	if (menu_current):
 		menu_current.visible = true
+		
+func Update_menu_after () -> void:
+	menu_section_main.visible = true
 
 
 # --- Signals for pressing the buttons
@@ -93,3 +100,6 @@ func _on_back_pressed() -> void:
 	# SERVER_get_match_results () 
 	# --- # ----
 	
+func _on_pick_pressed():
+	Show_menu("MATCHMAKING")
+	menu_section_main.visible = false

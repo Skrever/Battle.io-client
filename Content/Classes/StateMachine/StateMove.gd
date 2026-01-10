@@ -42,11 +42,10 @@ func Physics_update (_delta):
 		its_state_object.velocity = direction * its_state_object.SPEED
 		its_state_object.move_and_slide()
 	else:
-		print("<StateMove> : ", its_state_object.is_local_player())
 		current_direction = its_state_object.direction
 		
 	if (current_direction == Vector2.ZERO):
-		print("<StateMove> : Vector ZERO -> Idle")
+		#print("<StateMove> : Vector ZERO -> Idle (about)", its_state_object.is_local_player())
 		its_state_machine.Change_state("stateidle")
 		return
 		
