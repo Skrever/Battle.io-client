@@ -213,6 +213,7 @@ func analyze_receive_data(packet : PackedByteArray):
 		# Game state
 		RECEIVE_COMMAND.GAME_STATE:
 			Signals.GameStateChanged.emit(_get_int32_from_packet(packet, 5, 8))
+			#print("<Websocket> : getted state: ", _get_int32_from_packet(packet, 5, 8) )
 		
 		# All bullets positions
 		RECEIVE_COMMAND.BULLET_POSITION:
