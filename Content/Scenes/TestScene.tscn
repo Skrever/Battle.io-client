@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ceenn2qent2x1"]
+[gd_scene load_steps=57 format=3 uid="uid://ceenn2qent2x1"]
 
 [ext_resource type="Texture2D" uid="uid://b3gw10tts6iky" path="res://Content/Assets/Tilesets/Grass.png" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://ci6roeejn6265" path="res://Content/Classes/UIManagment/GameSceneConnector.gd" id="1_201fe"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://cknk1ges0j2dk" path="res://Content/Assets/UI/Button_pressed.png" id="22_naoyn"]
 [ext_resource type="Texture2D" uid="uid://c8stfa8uvha08" path="res://Content/Assets/UI/Button_focused.png" id="23_rmix1"]
 [ext_resource type="AudioStream" uid="uid://mcn0wmcemta5" path="res://Content/Assets/Sounds/Music/the-tournament-280277.mp3" id="26_rmix1"]
+[ext_resource type="Script" uid="uid://btileprm15chm" path="res://Content/Classes/Managers/BulletsManager/bullets_manager.gd" id="31_ma4qr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8k7wh"]
 texture = ExtResource("1_5lt6y")
@@ -1043,15 +1044,17 @@ layer_2/tile_data = PackedInt32Array(4718453, 4, 0, 4652917, 4, 0, 4587381, 4, 0
 layer_3/name = "Layer3"
 layer_3/tile_data = PackedInt32Array(2490409, 327686, 12, 1114180, 327686, 12, 1179718, 327686, 12, 589862, 327686, 12, 262172, 786438, 13, 196637, 851974, 13, 589829, 1048582, 11, 393224, 1507334, 11, 327689, 1572870, 11, 524299, 720902, 12, 917507, 327686, 12, 786434, 327686, 12, 655383, 983046, 12, 1245206, 655366, 13, 983067, 655366, 13)
 
-[node name="PlayersManager" parent="." instance=ExtResource("15_avgqa")]
+[node name="PlayersManager" parent="." node_paths=PackedStringArray("game_hud") instance=ExtResource("15_avgqa")]
+game_hud = NodePath("HUD")
 
-[node name="HUD" type="Node" parent="PlayersManager" node_paths=PackedStringArray("health_bar", "damage_bar", "mana_bar", "leak_bar", "ability_cooldown")]
+[node name="HUD" type="Node" parent="PlayersManager" node_paths=PackedStringArray("health_bar", "damage_bar", "mana_bar", "leak_bar", "ability_cooldown", "ability_icon")]
 script = ExtResource("8_5rbs6")
 health_bar = NodePath("HUD/HealthBar/HealthBar")
 damage_bar = NodePath("HUD/HealthBar/DamageBar")
 mana_bar = NodePath("HUD/ManaBar/ManaBar")
 leak_bar = NodePath("HUD/ManaBar/LeakBar")
 ability_cooldown = NodePath("HUD/Ability/AbilityHolder/AbilityCooldown")
+ability_icon = NodePath("HUD/Ability/AbilityHolder/AbilityIcon")
 
 [node name="HUD" type="CanvasLayer" parent="PlayersManager/HUD"]
 
@@ -1435,6 +1438,10 @@ stream = ExtResource("26_rmix1")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="BulletsManager" type="Node2D" parent="."]
+script = ExtResource("31_ma4qr")
+metadata/_custom_type_script = "uid://btileprm15chm"
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="value_changed" from="PlayersManager/HUD/HUD/IngameUI/CanvasLayer/IngameSettings/SettingsWindow/MusicSlider" to="." method="_on_music_slider_value_changed"]

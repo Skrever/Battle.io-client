@@ -9,11 +9,17 @@ class_name GameHUD
 @export var leak_bar   : ProgressBar
 		
 @export var ability_cooldown : TextureProgressBar
+@export var ability_icon 	 : TextureRect
 
 var health_tween : Tween
 
 func _ready () -> void:
 	ability_cooldown.value = 0
+	Signals.PlayerDamaged.connect(Update_health_bar)
+	if ThisClient.selected_character == "Тихий":
+		ability_icon.texture = preload("res://Content/Assets/UI/Ability_Quiet_1.png")
+	else:
+		ability_icon.texture = preload("res://Content/Assets/UI/Ability_Bloodweaver_1.png")
 
 # --- Function for initializaing HUD's health bar
 func Initialize_HUD (
@@ -30,6 +36,7 @@ func Initialize_HUD (
 	mana_bar.value 			= current_mana
 	leak_bar.max_value 		= stat_mana
 	leak_bar.value 			= current_mana
+	print("HUD INITIALIZED", stat_health, stat_mana)
 
 # --- Function for updating values of HUD's health bar
 func Update_health_bar (new_health) -> void:

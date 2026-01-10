@@ -44,5 +44,6 @@ func Get_next_character () -> void:
 	
 func Select_character () -> void:
 	selected_character = characters[current_index].name
+	ThisClient.selected_character = selected_character
 	print("<QPManager> : Character selected ", selected_character)
 	get_tree().change_scene_to_file("res://Content/Scenes/TestScene.tscn")

@@ -7,3 +7,5 @@ var player_current_session : int = 1
 var bus_music_value : int
 
 var bus_audio_value : int
+
+var selected_character : String
