@@ -4,8 +4,8 @@ extends Node2D
 @export var menu_ingame_ui	 : Control
 
 func _ready () -> void:
-	#CLIENT.get_room()
-	CLIENT.accept_session()
+	CLIENT.get_room()
+	#CLIENT.accept_session()
 	Global.GameStateIsStop.connect(Navigate_to_menu)
 	Global.GameStateIsPlay.connect(Navigate_to_arena)
 	
