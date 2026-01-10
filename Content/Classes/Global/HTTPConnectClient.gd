@@ -28,7 +28,7 @@ var _new_room_requester : HTTPRequest = HTTPRequest.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#playerId = randi_range(1, 5)
+	playerId = randi_range(2, 5)
 	add_child(_room_accepter)
 	_room_accepter.request_completed.connect(_accept_session_response)
 	

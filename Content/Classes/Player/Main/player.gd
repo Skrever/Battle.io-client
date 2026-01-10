@@ -15,15 +15,12 @@ signal _on_mana_changed		(new_value)
 signal _on_ability_used		(cooldown_time)
 signal _on_player_died		()
 
-# -- Player speed parameter
+
+# -- Player parameters (CHG FR PRD)
 const SPEED = 300.0
-
-const HEALTH = 100.0
-
+const HEALTH = 100.0 
 const MANA = 100.0
-
 var current_health : float = HEALTH
-
 var current_mana : float = MANA
 
 # -- Player server id parameter
@@ -44,7 +41,7 @@ var sync_global_position : Vector2:
 			global_position = value
 			sync_global_position = global_position
 # -- Node for animted behaviouir
-var for_animation_object : AnimatedSprite2D
+@export var for_animation_object : AnimatedSprite2D
 # -- Node for collision behaviour
 @export var for_collision_object : CollisionShape2D
 
@@ -53,20 +50,16 @@ func _ready() -> void:
 	Signals.PlayerDamaged.connect(get_damage)
 	Signals.PlayerKilled.connect(dead)
 	var state_machine : Node = preload("uid://18clg5181kcm").instantiate()
-	var animated_sprite
-	if ThisClient.selected_character == "Тихий":
-		animated_sprite  = preload("uid://bfbpbmpne3wtp").instantiate()
-	else:
-		animated_sprite  = preload("uid://ekd7kqyhwdsr").instantiate()
+	#var animated_sprite
+	#if ThisClient.selected_character == "Тихий":
+	#	animated_sprite  = preload("uid://bfbpbmpne3wtp").instantiate()
+	#else:
+	#	animated_sprite  = preload("uid://ekd7kqyhwdsr").instantiate()
 	var camera : Node = Camera2D.new()
 	camera.zoom.x = 2.0
 	camera.zoom.y = 2.0
 	add_child(state_machine)
 	add_child(camera)
-	add_child(animated_sprite)
-	for child in get_children():
-		if child is AnimatedSprite2D:
-			for_animation_object = child
 
 func move(delta : float):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
@@ -105,3 +98,6 @@ func dead(player_id : int):
 		print("<Player> : id ", id,  " dead")
 	current_health = 0
 	
+# -- Check client player function
+func is_local_player () -> bool:
+	return not (self is AnotherPlayer)

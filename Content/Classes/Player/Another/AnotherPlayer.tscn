@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://sdxyefjbc3rv"]
 
 [ext_resource type="Script" uid="uid://dn2j742p1cbex" path="res://Content/Classes/Player/Another/another_player.gd" id="1_5ghpm"]
-[ext_resource type="PackedScene" uid="uid://bfbpbmpne3wtp" path="res://Content/Classes/Player/Classes/Quiet.tscn" id="2_yvyy3"]
-[ext_resource type="PackedScene" uid="uid://c3ly5kwtp0nbm" path="res://Content/Classes/Player/Another/state_machine_another.tscn" id="3_hdc07"]
+[ext_resource type="PackedScene" uid="uid://18clg5181kcm" path="res://Content/Classes/Player/Main/state_machine.tscn" id="3_hdc07"]
+[ext_resource type="PackedScene" uid="uid://ekd7kqyhwdsr" path="res://Content/Classes/Player/Classes/Bloodweaver.tscn" id="3_nkdgl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utig6"]
 
@@ -10,8 +10,10 @@
 radius = 10.0
 height = 20.0
 
-[node name="AnotherPlayer" type="CharacterBody2D"]
+[node name="AnotherPlayer" type="CharacterBody2D" node_paths=PackedStringArray("for_animation_object", "for_collision_object")]
 script = ExtResource("1_5ghpm")
+for_animation_object = NodePath("Bloodweaver")
+for_collision_object = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://dn2j742p1cbex"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -21,6 +23,6 @@ debug_color = Color(0.311415, 0.626461, 5.77569e-07, 0.42)
 [node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
 mesh = SubResource("SphereMesh_5ghpm")
 
-[node name="Quiet" parent="." instance=ExtResource("2_yvyy3")]
+[node name="StateMachine" parent="." instance=ExtResource("3_hdc07")]
 
-[node name="StateMachineAnother" parent="." instance=ExtResource("3_hdc07")]
+[node name="Bloodweaver" parent="." instance=ExtResource("3_nkdgl")]
