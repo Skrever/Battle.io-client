@@ -73,6 +73,9 @@ func _get_room_response(result, response_code, headers, body):
 
 func accept_session():
 	print("<Server> : connecting to accepter")
+	
+	GAME_DATA.clear()
+	
 	var err : Error
 	var body : String = JSON.new().stringify({
 		"playerId": playerId
