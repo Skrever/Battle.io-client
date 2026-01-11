@@ -3,11 +3,15 @@ extends Node2D
 @export var menu_matchmaking : Control
 @export var menu_ingame_ui	 : Control
 
+
 func _ready () -> void:
-	CLIENT.get_room()
-	#CLIENT.accept_session()
+	#CLIENT.get_room()
+	CLIENT.accept_session()
 	Global.GameStateIsStop.connect(Navigate_to_menu)
 	Global.GameStateIsPlay.connect(Navigate_to_arena)
+	
+	await get_tree().create_timer(20).timeout
+	WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, "Hellloooo!!!!")
 	
 func Navigate_to_arena () -> void:
 	menu_matchmaking.visible = false

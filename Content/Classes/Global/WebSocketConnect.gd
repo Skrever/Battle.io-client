@@ -155,6 +155,7 @@ func send_byte_binary_data(command : SEND_COMMAND, data : PackedByteArray):
 func send_string(command : SEND_COMMAND, data : String):
 	match command:
 		SEND_COMMAND.MESSAGE:
+			
 			var byte_data : PackedByteArray = data.to_utf16_buffer()
 			send_byte_binary_data(command, byte_data)
 
