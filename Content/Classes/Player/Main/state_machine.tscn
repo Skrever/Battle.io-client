@@ -23,6 +23,6 @@ metadata/_custom_type_script = "uid://cq6ch2433m4hb"
 script = ExtResource("5_wbqt1")
 metadata/_custom_type_script = "uid://dj8pe4gcolx75"
 
-[node name="StateMovingAttack" type="Node" parent="."]
+[node name="StateDashAttack" type="Node" parent="."]
 script = ExtResource("5_qd8t8")
 metadata/_custom_type_script = "uid://clvb0pqlpd6jr"

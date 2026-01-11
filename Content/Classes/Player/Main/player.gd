@@ -90,13 +90,13 @@ func shoot():
 func get_damage(player_id : int, health : int, damage : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " getted ", damage)
-	current_health -= damage
-	_on_health_changed.emit(current_health)
+		current_health -= damage
+		_on_health_changed.emit(current_health)
 
 func dead(player_id : int):
 	if player_id == id:
 		print("<Player> : id ", id,  " dead")
-	current_health = 0
+		current_health = 0
 	
 # -- Check client player function
 func is_local_player () -> bool:

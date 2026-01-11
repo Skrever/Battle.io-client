@@ -39,7 +39,7 @@ func Initialize_HUD (
 	print("HUD INITIALIZED", stat_health, stat_mana)
 
 # --- Function for updating values of HUD's health bar
-func Update_health_bar (new_health) -> void:
+func Update_health_bar (id : int, new_health : int, damage : int) -> void:
 	var old_health = health_bar.value
 	health_bar.value = new_health
 	

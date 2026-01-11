@@ -18,11 +18,16 @@ func _ready() -> void:
 
 # / Enter state function /
 func Enter():
-	# print("moving attack enter")
+	print("moving attack enter")
 	
 	if (not can_do):
 		its_state_machine.Change_state("stateidle")
 		return
+		
+	can_do = false
+	timer.start()
+	
+	its_state_object._on_ability_used.emit(cooldown_time)
 		
 	if not its_state_object.for_animation_object.animation_finished.is_connected(_on_animation_finished):
 		its_state_object.for_animation_object.animation_finished.connect(_on_animation_finished)

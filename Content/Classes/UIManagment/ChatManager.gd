@@ -32,6 +32,7 @@ func Setup_chat_state () -> void:
 	chat_toggler.mouse_entered.connect(_on_chat_toggler_mouse_entered)
 	chat_toggler.mouse_exited.connect(_on_chat_toggler_mouse_exited)
 	chat_animator.animation_finished.connect(_on_animation_finished)
+	Signals.ChatMessageWasGet.connect(SERVER_Get_chat_message)
 	
 # --- Chats function for hidden state
 func CHAT_Enter_collapsed_state () -> void:
@@ -97,35 +98,28 @@ func _on_chat_toggler_mouse_exited():
 # ---- # ---- # MESSAGE CONTROL SIDE # ---- # ---- #
 
 # --- PH function for getting message form the server
-func SERVER_Get_chat_message () -> ChatMessage:
-	var message : ChatMessage
-	# - ! - ! - ! - ! - ! -
-	# REQUEST TO SERVER
-	# Messages DATA -> id of a session, player nickname,
-	# sent message, timestamp
-	# - ! - ! - ! - ! - ! -
+func SERVER_Get_chat_message (id : int, text : String) -> ChatMessage:
+	var message = ChatMessage.create(
+		id,
+		text,
+		Time.get_time_string_from_system() 
+	)
+	Table_add_message(message)
 	return message
 	
 
 # --- PH function for sending message to the server
-func SERVER_Send_chat_message (message : ChatMessage) -> bool:
-	# - ! - ! - ! - ! - ! -
-	# SEND TO SERVER
-	# Messages DATA -> id of a session, player nickname,
-	# sent message, timestamp
-	# - ! - ! - ! - ! - ! -
-	# if block ->
-	return true
+func SERVER_Send_chat_message (message : ChatMessage) -> void:
+	WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, message.message)
 	
 
 # --- Function for submitting and sending message to the chat
 func Send_message () -> void:
 	var message = chat_field.text.strip_edges()
-	var time = Time.get_time_string_from_system() # Overwrite by the server
+	var time = Time.get_time_string_from_system() 
 	if (message.length() > 0):
 		var chat_message = ChatMessage.create(
-			ThisClient.player_current_session,
-			ThisClient.player_nickname,
+			CLIENT.playerId,
 			message,
 			time
 		)
@@ -135,13 +129,10 @@ func Send_message () -> void:
 
 # --- Function for applying message to the chat table
 func Table_add_message (chat_message : ChatMessage) -> void:
-	if (chat_message.session == ThisClient.player_current_session):
-		message_history.append(chat_message)
-		var formatted_message = "[%s] (%s) : %s" % [chat_message.nickname, chat_message.time, chat_message.message]
-		chat_table.text += formatted_message + "\n"
-		chat_table.scroll_vertical = chat_table.get_line_count()
-	else:
-		pass
+	message_history.append(chat_message)
+	var formatted_message = "[%s] (%s) : %s" % [chat_message.nickname, chat_message.time, chat_message.message]
+	chat_table.text += formatted_message + "\n"
+	chat_table.scroll_vertical = chat_table.get_line_count()
 
 # --- Function reading player input for sending
 func _input (event : InputEvent) -> void:

@@ -11,7 +11,7 @@ func _ready () -> void:
 	Global.GameStateIsPlay.connect(Navigate_to_arena)
 	
 	await get_tree().create_timer(randi_range(15, 25)).timeout
-	WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, "Hellloooo!!!!")
+	#WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, "Hellloooo!!!!")
 	
 func Navigate_to_arena () -> void:
 	menu_matchmaking.visible = false
