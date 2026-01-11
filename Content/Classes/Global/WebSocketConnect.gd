@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 		while socket.get_available_packet_count() > 0:
 			match socket.get_ready_state():
 				WebSocketPeer.STATE_OPEN:
-					print("<Websocket> : packet is ",socket.get_packet())
+					#print("<Websocket> : packet is ",socket.get_packet())
 					analyze_receive_data(socket.get_packet())
 				WebSocketPeer.STATE_CLOSING:
 					print("<Websocket> : connection closing...")
@@ -230,10 +230,23 @@ func analyze_receive_data(packet : PackedByteArray):
 			GAME_DATA.bullets_position[entity_id] = position
 			GAME_DATA.mutexBulletsPosition.unlock()
 			print("<Websocket> : getted command - ", command, " and entity_id - ", entity_id, " and data is ", position)
+		RECEIVE_COMMAND.MESSAGE:
+			#print("<Websocket> : getted new message!")
+			Signals.ChatMessageWasGet.emit(entity_id, _get_string_utf16_from_packet(packet, 5, packet.size()))
+			#print("<Websocket ", CLIENT.globalId, " > : reseived message from : ", entity_id, " and text - ", _get_string_utf16_from_packet(packet, 5, packet.size()))
 		_:
 			print("<Websocket> : getted unknown command: ", command)
-	
 
+## !!!BE CAREFUL!!!
+# from - first byte, to - size packet array
+func _get_string_utf16_from_packet(packet : PackedByteArray, from : int, to : int) -> String:
+	var raw_string : PackedByteArray;
+	for i in range(from, to):
+		raw_string.append(packet[i])
+	return raw_string.get_string_from_utf16()
+	
+## !!!BE CAREFUL!!!
+# from - first byte of int32, to - last byte of int32
 func _get_int32_from_packet(packet : PackedByteArray, from : int, to : int) -> int:
 	var ret : int = 0
 	for i : int in range(from, to + 1):
@@ -275,6 +288,7 @@ func _int32_to_bytes(value : int) -> PackedByteArray:
 	ret.push_back(value & 0xFF)
 
 	return ret
+
 
 func _vector2_to_bytes(value : Vector2, accuracy : int) -> PackedByteArray:
 	var ret : PackedByteArray

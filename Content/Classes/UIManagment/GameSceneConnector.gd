@@ -10,7 +10,7 @@ func _ready () -> void:
 	Global.GameStateIsStop.connect(Navigate_to_menu)
 	Global.GameStateIsPlay.connect(Navigate_to_arena)
 	
-	await get_tree().create_timer(20).timeout
+	await get_tree().create_timer(randi_range(15, 25)).timeout
 	WEBSOCKET.send_string(WEBSOCKET.SEND_COMMAND.MESSAGE, "Hellloooo!!!!")
 	
 func Navigate_to_arena () -> void:
