@@ -737,7 +737,7 @@ _data = {
 &"button_unhover": SubResource("Animation_eq4af")
 }
 
-[node name="UISegment" type="Control" node_paths=PackedStringArray("menu_section_main", "menu_section_settings", "menu_section_leaderboard", "menu_label", "menu_quickplay", "menu_result", "menu_matchmaking", "animator_main", "animator_settings", "animator_leaderboard")]
+[node name="UISegment" type="Control" node_paths=PackedStringArray("menu_section_main", "menu_section_settings", "menu_section_leaderboard", "menu_label", "menu_quickplay", "menu_result", "animator_main", "animator_settings", "animator_leaderboard")]
 z_index = -1
 texture_filter = 1
 layout_mode = 3
@@ -758,7 +758,6 @@ menu_section_leaderboard = NodePath("CanvasLayer/Leaderboard/LeaderboardWindow")
 menu_label = NodePath("CanvasLayer/Menu/MenuWindow/Label")
 menu_quickplay = NodePath("CanvasLayer/Quickplay")
 menu_result = NodePath("CanvasLayer/GameResults")
-menu_matchmaking = NodePath("")
 animator_main = NodePath("CanvasLayer/Main/animator")
 animator_settings = NodePath("CanvasLayer/Settings/animator")
 animator_leaderboard = NodePath("CanvasLayer/Leaderboard/animator")

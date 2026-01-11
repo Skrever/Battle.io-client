@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ch1il0loox00s"]
 
 [ext_resource type="Script" uid="uid://coh78gqbrj2ca" path="res://Content/Classes/Player/Main/player.gd" id="1_0se1s"]
-[ext_resource type="PackedScene" uid="uid://bfbpbmpne3wtp" path="res://Content/Classes/Player/Classes/Quiet.tscn" id="2_15cf0"]
+[ext_resource type="PackedScene" uid="uid://ekd7kqyhwdsr" path="res://Content/Classes/Player/Classes/Bloodweaver.tscn" id="2_15cf0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0se1s"]
 
@@ -11,7 +11,7 @@ height = 20.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("for_animation_object", "for_collision_object")]
 script = ExtResource("1_0se1s")
-for_animation_object = NodePath("Quiet")
+for_animation_object = NodePath("Bloodweaver")
 for_collision_object = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://coh78gqbrj2ca"
 
@@ -22,4 +22,4 @@ debug_color = Color(0.311415, 0.626461, 5.77569e-07, 0.42)
 [node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
 mesh = SubResource("SphereMesh_llgy0")
 
-[node name="Quiet" parent="." instance=ExtResource("2_15cf0")]
+[node name="Bloodweaver" parent="." instance=ExtResource("2_15cf0")]

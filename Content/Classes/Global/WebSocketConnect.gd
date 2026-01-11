@@ -7,7 +7,7 @@ signal ConnectToServerFailed
 signal ConnectionClosed(code : int)
 
 
-#Максимум 256 команд
+# 256 cpmmand maximum
 enum SEND_COMMAND{
 	NONE,
 	VECTOR2,
@@ -16,7 +16,7 @@ enum SEND_COMMAND{
 	MESSAGE
 }
 
-#Максимум 256 команд
+# 256 cpmmand maximum
 enum RECEIVE_COMMAND{
 	NONE,
 	ENTITY_POSITION,
@@ -34,7 +34,7 @@ enum RECEIVE_COMMAND{
 	GAME_STATE = 255
 }
 
-const FLOAT_ACCURACY = 1000 # насколько сильно резать float при передаче данных
+const FLOAT_ACCURACY = 1000
 const WS_PREFIX = "ws://"
 
 var mutex_socket : Mutex = Mutex.new()
@@ -63,7 +63,6 @@ var room_key : int = 0:
 			room_key_in_byte_array[3] = (room_key & 0xFF)
 			
 # Called when the node enters the scene tree for the first time.
-
 func _ready() -> void:
 	CLIENT.SessionAccepted.connect(_start)
 
@@ -90,7 +89,7 @@ func _process(delta: float) -> void:
 					pass
 	mutex_socket.unlock()
 
-# Чтобы выслать тот же float - распарсить его на целую и дробную часть и вписать в массив. В cзависимости от команды он будет упакован
+
 func send_binary_data(command : SEND_COMMAND, data : PackedInt32Array):
 	mutex_socket.lock()
 	if socket != null and CLIENT.session_accepted:
@@ -172,7 +171,7 @@ func _connect_url(url : String) -> WebSocketPeer:
 			print("<Websocket> : connecting with state ", current_socket.get_ready_state())
 		print("<Websocket> : connected on address ", current_socket.get_connected_host(), " and port ", current_socket.get_connected_port())
 		
-		## packed and send auth bytes
+		# packed and send auth bytes
 		#pack
 		var bytes : PackedByteArray = []
 		bytes.append_array(player_id_in_byte_array)

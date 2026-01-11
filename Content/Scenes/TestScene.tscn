@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://ceenn2qent2x1"]
+[gd_scene load_steps=97 format=3 uid="uid://ceenn2qent2x1"]
 
 [ext_resource type="Texture2D" uid="uid://b3gw10tts6iky" path="res://Content/Assets/Tilesets/Grass.png" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://ci6roeejn6265" path="res://Content/Classes/UIManagment/GameSceneConnector.gd" id="1_201fe"]
@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://c8stfa8uvha08" path="res://Content/Assets/UI/Button_focused.png" id="23_rmix1"]
 [ext_resource type="AudioStream" uid="uid://mcn0wmcemta5" path="res://Content/Assets/Sounds/Music/the-tournament-280277.mp3" id="26_rmix1"]
 [ext_resource type="Script" uid="uid://btileprm15chm" path="res://Content/Classes/Managers/BulletsManager/bullets_manager.gd" id="31_ma4qr"]
+[ext_resource type="Script" uid="uid://dmqmru3847opq" path="res://Content/Classes/UIManagment/IngameDialogue.gd" id="37_h48n0"]
+[ext_resource type="Texture2D" uid="uid://yqwwvxygm5g7" path="res://Content/Assets/UI/Died_message.png" id="37_j0i5c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8k7wh"]
 texture = ExtResource("1_5lt6y")
@@ -1272,7 +1274,7 @@ _data = {
 [node name="TestScene" type="Node2D" node_paths=PackedStringArray("menu_matchmaking", "menu_ingame_ui")]
 script = ExtResource("1_201fe")
 menu_matchmaking = NodePath("PlayersManager/HUD/HUD/MatchMenu")
-menu_ingame_ui = NodePath("PlayersManager/HUD/HUD/IngameUI")
+menu_ingame_ui = NodePath("PlayersManager/HUD/HUD/IngameUI/CanvasLayer")
 
 [node name="TileMap" type="TileMap" parent="."]
 rotation = 0.000387972
@@ -1549,7 +1551,6 @@ texture = ExtResource("19_cfcq1")
 metadata/_edit_use_anchors_ = true
 
 [node name="IngameUI" type="Control" parent="PlayersManager/HUD/HUD" node_paths=PackedStringArray("ingame_settings", "ingame_menu", "ingame_animator")]
-visible = false
 layout_mode = 3
 anchor_left = 1.2010001
 anchor_top = 0.517
@@ -1707,6 +1708,35 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_axmst")
 }
+
+[node name="IngameMessage" type="Control" parent="PlayersManager/HUD/HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("37_h48n0")
+
+[node name="TextureRect" type="TextureRect" parent="PlayersManager/HUD/HUD/IngameMessage"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 233.00003
+offset_right = 637.0
+offset_bottom = 345.00003
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("37_j0i5c")
+
+[node name="Label" type="Label" parent="PlayersManager/HUD/HUD/IngameMessage/TextureRect"]
+layout_mode = 0
+offset_left = 6.7999983
+offset_top = 45.199986
+offset_right = 122.799995
+offset_bottom = 68.19999
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("22_axmst")
+theme_override_font_sizes/font_size = 10
+text = "ВЫ УМЕРЛИ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IngamePlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("26_rmix1")

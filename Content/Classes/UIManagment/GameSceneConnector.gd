@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var menu_matchmaking : Control
-@export var menu_ingame_ui	 : Control
+@export var menu_ingame_ui	 : CanvasLayer
 
 
 func _ready () -> void:

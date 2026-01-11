@@ -93,8 +93,3 @@ func _on_back_pressed() -> void:
 	Show_menu("MAIN")
 	menu_label.text = "ГЛАВНОЕ МЕНЮ"
 	
-	# --- # ---
-	# Needs a server request
-	# to show game statisctics
-	# SERVER_get_match_results () 
-	# --- # ----
