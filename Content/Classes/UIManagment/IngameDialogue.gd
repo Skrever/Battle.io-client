@@ -5,4 +5,5 @@ func _ready () -> void:
 	Signals.PlayerKilled.connect(Show_death_message)
 
 func Show_death_message (id : int) -> void:
-	self.visible = true
+	if id == CLIENT.globalId:
+		self.visible = true

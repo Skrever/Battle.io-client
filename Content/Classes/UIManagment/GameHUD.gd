@@ -40,18 +40,19 @@ func Initialize_HUD (
 
 # --- Function for updating values of HUD's health bar
 func Update_health_bar (id : int, new_health : int, damage : int) -> void:
-	var old_health = health_bar.value
-	health_bar.value = new_health
-	
-	if new_health < old_health:
-		if (health_tween):
-			health_tween.kill()
-			
-		health_tween = create_tween()
-		health_tween.tween_interval(0.1)
-		health_tween.tween_property(damage_bar, "value", new_health, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	else:
-		damage_bar.value = new_health
+	if id == CLIENT.globalId:
+		var old_health = health_bar.value
+		health_bar.value = new_health
+		
+		if new_health < old_health:
+			if (health_tween):
+				health_tween.kill()
+				
+			health_tween = create_tween()
+			health_tween.tween_interval(0.1)
+			health_tween.tween_property(damage_bar, "value", new_health, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		else:
+			damage_bar.value = new_health
 	
 # --- Function to start cooldowmn of HUD's ability
 func Start_cooldown (time : float) -> void:

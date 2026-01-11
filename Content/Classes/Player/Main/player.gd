@@ -88,13 +88,13 @@ func shoot():
 	
 
 func get_damage(player_id : int, health : int, damage : int):
-	if player_id == id:
-		print("<Player> : id ", id,  " getted ", damage)
+	if player_id == CLIENT.globalId:
+		print("<Player> : id ", id,  "fgh getted ", damage)
 		current_health -= damage
 		_on_health_changed.emit(current_health)
 
 func dead(player_id : int):
-	if player_id == id:
+	if player_id == CLIENT.globalId:
 		print("<Player> : id ", id,  " dead")
 		current_health = 0
 	
