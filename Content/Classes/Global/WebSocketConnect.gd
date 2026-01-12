@@ -7,15 +7,16 @@ signal ConnectToServerFailed
 signal ConnectionClosed(code : int)
 
 
-#Максимум 256 команд
+# 256 cpmmand maximum
 enum SEND_COMMAND{
 	NONE,
 	VECTOR2,
 	PLAYER_DIRECTION,
-	PLAYER_SHOOT
+	PLAYER_SHOOT,
+	MESSAGE
 }
 
-#Максимум 256 команд
+# 256 cpmmand maximum
 enum RECEIVE_COMMAND{
 	NONE,
 	ENTITY_POSITION,
@@ -28,10 +29,12 @@ enum RECEIVE_COMMAND{
 	BULLET_POSITION,
 	BULLET_DIRECTION,
 	
+	MESSAGE,
+	
 	GAME_STATE = 255
 }
 
-const FLOAT_ACCURACY = 1000 # насколько сильно резать float при передаче данных
+const FLOAT_ACCURACY = 1000
 const WS_PREFIX = "ws://"
 
 var mutex_socket : Mutex = Mutex.new()
@@ -60,7 +63,6 @@ var room_key : int = 0:
 			room_key_in_byte_array[3] = (room_key & 0xFF)
 			
 # Called when the node enters the scene tree for the first time.
-
 func _ready() -> void:
 	CLIENT.SessionAccepted.connect(_start)
 
@@ -87,7 +89,7 @@ func _process(delta: float) -> void:
 					pass
 	mutex_socket.unlock()
 
-# Чтобы выслать тот же float - распарсить его на целую и дробную часть и вписать в массив. В cзависимости от команды он будет упакован
+
 func send_binary_data(command : SEND_COMMAND, data : PackedInt32Array):
 	mutex_socket.lock()
 	if socket != null and CLIENT.session_accepted:
@@ -137,7 +139,7 @@ func send_byte_binary_data(command : SEND_COMMAND, data : PackedByteArray):
 				#pack data
 				bytes.append_array(data)
 				
-				print("<Websocket> : raw byte is ", bytes, " and size send data is ", bytes.size())
+				#print("<Websocket> : raw byte is ", bytes, " and size send data is ", bytes.size())
 				socket.send(bytes)
 				
 			WebSocketPeer.STATE_CLOSING:
@@ -148,6 +150,13 @@ func send_byte_binary_data(command : SEND_COMMAND, data : PackedByteArray):
 			_:
 				pass
 	mutex_socket.unlock()
+	
+func send_string(command : SEND_COMMAND, data : String):
+	match command:
+		SEND_COMMAND.MESSAGE:
+			
+			var byte_data : PackedByteArray = data.to_utf16_buffer()
+			send_byte_binary_data(command, byte_data)
 
 func _connect_url(url : String) -> WebSocketPeer:
 	var current_socket : WebSocketPeer = WebSocketPeer.new()
@@ -162,7 +171,7 @@ func _connect_url(url : String) -> WebSocketPeer:
 			print("<Websocket> : connecting with state ", current_socket.get_ready_state())
 		print("<Websocket> : connected on address ", current_socket.get_connected_host(), " and port ", current_socket.get_connected_port())
 		
-		## packed and send auth bytes
+		# packed and send auth bytes
 		#pack
 		var bytes : PackedByteArray = []
 		bytes.append_array(player_id_in_byte_array)
@@ -197,6 +206,7 @@ func analyze_receive_data(packet : PackedByteArray):
 		RECEIVE_COMMAND.PLAYER_DIRECTION:
 			GAME_DATA.mutexPlayersDirection.lock()
 			GAME_DATA.players_direction[entity_id] = _get_direction_from_byte(packet, 5)
+			#print("<Websocket> : get direction: ", packet)
 			GAME_DATA.mutexPlayersDirection.unlock()
 		
 		# Get damage of any player
@@ -210,6 +220,7 @@ func analyze_receive_data(packet : PackedByteArray):
 		# Game state
 		RECEIVE_COMMAND.GAME_STATE:
 			Signals.GameStateChanged.emit(_get_int32_from_packet(packet, 5, 8))
+			#print("<Websocket> : getted state: ", _get_int32_from_packet(packet, 5, 8) )
 		
 		# All bullets positions
 		RECEIVE_COMMAND.BULLET_POSITION:
@@ -218,10 +229,23 @@ func analyze_receive_data(packet : PackedByteArray):
 			GAME_DATA.bullets_position[entity_id] = position
 			GAME_DATA.mutexBulletsPosition.unlock()
 			print("<Websocket> : getted command - ", command, " and entity_id - ", entity_id, " and data is ", position)
+		RECEIVE_COMMAND.MESSAGE:
+			#print("<Websocket> : getted new message!")
+			Signals.ChatMessageWasGet.emit(entity_id, _get_string_utf16_from_packet(packet, 5, packet.size()))
+			#print("<Websocket ", CLIENT.globalId, " > : reseived message from : ", entity_id, " and text - ", _get_string_utf16_from_packet(packet, 5, packet.size()))
 		_:
 			print("<Websocket> : getted unknown command: ", command)
-	
 
+## !!!BE CAREFUL!!!
+# from - first byte, to - size packet array
+func _get_string_utf16_from_packet(packet : PackedByteArray, from : int, to : int) -> String:
+	var raw_string : PackedByteArray;
+	for i in range(from, to):
+		raw_string.append(packet[i])
+	return raw_string.get_string_from_utf16()
+	
+## !!!BE CAREFUL!!!
+# from - first byte of int32, to - last byte of int32
 func _get_int32_from_packet(packet : PackedByteArray, from : int, to : int) -> int:
 	var ret : int = 0
 	for i : int in range(from, to + 1):
@@ -263,6 +287,7 @@ func _int32_to_bytes(value : int) -> PackedByteArray:
 	ret.push_back(value & 0xFF)
 
 	return ret
+
 
 func _vector2_to_bytes(value : Vector2, accuracy : int) -> PackedByteArray:
 	var ret : PackedByteArray
